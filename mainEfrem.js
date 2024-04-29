@@ -215,7 +215,7 @@ function main() {
                 targetPosisiTutupMissileKanan.z += cameraSpeed;
                 targetPosisiTutupMissileKiri.z += cameraSpeed;
                 // targetPosisiTutupMissileKiri.z += missileSpeed;
-                // bezierindex += 2;
+                // bezierindex += 2; --> For Firing Missile (Missile Path Follows a Bezier Curve)
                 break;
             case "s":
                 targetCameraPosition.z -= cameraSpeed;
@@ -264,10 +264,6 @@ function main() {
                 targetPosisiMissileKiri.x += cameraSpeed;
                 targetPosisiTutupMissileKanan.x += cameraSpeed;
                 targetPosisiTutupMissileKiri.x += cameraSpeed;
-                targetPosisiMissileKanan.x -= cameraSpeed;
-                targetPosisiMissileKiri.x -= cameraSpeed;
-                targetPosisiTutupMissileKanan.x -= cameraSpeed;
-                targetPosisiTutupMissileKiri.x -= cameraSpeed;
                 break;
             case "d":
                 targetCameraPosition.x -= cameraSpeed;
@@ -288,10 +284,10 @@ function main() {
                 targetPosisiSayapKiriInner.x -= cameraSpeed;
                 targetPosisiSayapKananOuter.x -= cameraSpeed;
                 targetPosisiSayapKiriOuter.x -= cameraSpeed;
-                targetPosisiMissileKanan.y -= cameraSpeed;
-                targetPosisiMissileKiri.y -= cameraSpeed;
-                targetPosisiTutupMissileKanan.y -= cameraSpeed;
-                targetPosisiTutupMissileKiri.y -= cameraSpeed;
+                targetPosisiMissileKanan.x -= cameraSpeed;
+                targetPosisiMissileKiri.x -= cameraSpeed;
+                targetPosisiTutupMissileKanan.x -= cameraSpeed;
+                targetPosisiTutupMissileKiri.x -= cameraSpeed;
                 break;
             case "q":
                 targetCameraPosition.y -= cameraSpeed;
@@ -341,16 +337,19 @@ function main() {
                 targetPosisiTutupMissileKanan.y += cameraSpeed;
                 targetPosisiTutupMissileKiri.y += cameraSpeed;
                 break;
-            // case "r":
-            //     targetPosisiSayapKananOuter.x += 0.1;
-            //     targetPosisiSayapKiriOuter.x -= 0.1;
-            //     break;
+            case "t":
+                targetPosisiSayapKananOuter.x += 0.1;
+                targetPosisiSayapKiriOuter.x -= 0.1;
+                break;
             case "r":
                 targetPosisiSayapKananOuter.x -= 0.1;
                 targetPosisiSayapKiriOuter.x += 0.1;
                 break;
             case "o":
                 rotateAmount += rotateIncrease;
+                break;
+            case "i":
+                rotateAmount -= rotateIncrease;
                 break;
             case "l":
                 targetPosisiMissileKiri.y -= cameraSpeed;
@@ -2418,54 +2417,53 @@ function main() {
 
         GL.drawElements(GL.TRIANGLE_FAN, sunFaces.length, GL.UNSIGNED_SHORT, 0);
 
-        // //MISSILE KANAN
-        // GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_MISSILEKANAN);
+        //MISSILE KANAN
+        GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_MISSILEKANAN);
 
-        // GL.bindBuffer(GL.ARRAY_BUFFER, MISSILEKANAN_VERTEX);
+        GL.bindBuffer(GL.ARRAY_BUFFER, MISSILEKANAN_VERTEX);
 
-        // GL.uniform1f(_greyscality, 0);
-        // GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
-        // GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
+        GL.uniform1f(_greyscality, 0);
+        GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
+        GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
 
-        // GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, MISSILEKANAN_FACES);
-        // GL.drawElements(GL.TRIANGLE_FAN, missileKananFaces.length, GL.UNSIGNED_SHORT, 0);
+        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, MISSILEKANAN_FACES);
+        GL.drawElements(GL.TRIANGLE_FAN, missileKananFaces.length, GL.UNSIGNED_SHORT, 0);
 
-        //MISSILE KIRI
-        // GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_MISSILEKIRI);
+        // MISSILE KIRI
+        GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_MISSILEKIRI);
 
-        // GL.bindBuffer(GL.ARRAY_BUFFER, MISSILEKIRI_VERTEX);
+        GL.bindBuffer(GL.ARRAY_BUFFER, MISSILEKIRI_VERTEX);
 
-        // GL.uniform1f(_greyscality, 0);
-        // GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
-        // GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
+        GL.uniform1f(_greyscality, 0);
+        GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
+        GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
 
-        // GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, MISSILEKIRI_FACES);
-        // GL.drawElements(GL.TRIANGLE_FAN, missileKiriFaces.length, GL.UNSIGNED_SHORT, 0);
+        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, MISSILEKIRI_FACES);
+        GL.drawElements(GL.TRIANGLE_FAN, missileKiriFaces.length, GL.UNSIGNED_SHORT, 0);
 
-        // // TUTUP MISSILE KANAN
-        // GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_TUTUPMISSILEKANAN);
+        // TUTUP MISSILE KANAN
+        GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_TUTUPMISSILEKANAN);
 
-        // GL.bindBuffer(GL.ARRAY_BUFFER, TUTUP_MISSILE_KANAN_VERTEX2);
+        GL.bindBuffer(GL.ARRAY_BUFFER, TUTUP_MISSILE_KANAN_VERTEX2);
 
-        // GL.uniform1f(_greyscality, 1);
-        // GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
-        // GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
+        GL.uniform1f(_greyscality, 1);
+        GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
+        GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
 
-        // GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TUTUP_MISSILE_KANAN_FACES2);
-        // GL.drawElements(GL.TRIANGLE_FAN, tutupmissilekanan_faces2.length, GL.UNSIGNED_SHORT, 0);
+        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TUTUP_MISSILE_KANAN_FACES2);
+        GL.drawElements(GL.TRIANGLE_FAN, tutupmissilekanan_faces2.length, GL.UNSIGNED_SHORT, 0);
 
-        // // TUTUP MISSILE KIRI
-        // GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_TUTUPMISSILEKIRI);
+        // TUTUP MISSILE KIRI
+        GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_TUTUPMISSILEKIRI);
 
-        // GL.bindBuffer(GL.ARRAY_BUFFER, TUTUP_MISSILE_KIRI_VERTEX2);
+        GL.bindBuffer(GL.ARRAY_BUFFER, TUTUP_MISSILE_KIRI_VERTEX2);
 
-        // GL.uniform1f(_greyscality, 1);
-        // GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
-        // GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
+        GL.uniform1f(_greyscality, 1);
+        GL.vertexAttribPointer(_position, 3, GL.FLOAT, false, 4 * (3 + 3), 0);
+        GL.vertexAttribPointer(_color, 3, GL.FLOAT, false, 4 * (3 + 3), 3 * 4);
 
-        // GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TUTUP_MISSILE_KIRI_FACES2);
-        // GL.drawElements(GL.TRIANGLE_FAN, tutupmissilekiri_faces2.length, GL.UNSIGNED_SHORT, 0);
-
+        GL.bindBuffer(GL.ELEMENT_ARRAY_BUFFER, TUTUP_MISSILE_KIRI_FACES2);
+        GL.drawElements(GL.TRIANGLE_FAN, tutupmissilekiri_faces2.length, GL.UNSIGNED_SHORT, 0);
 
         //BATANGPOHON
         GL.uniformMatrix4fv(_Mmatrix, false, MOVEMATRIX_BATANGPOHON);
